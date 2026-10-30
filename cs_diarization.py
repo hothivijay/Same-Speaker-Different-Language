@@ -13,7 +13,8 @@ Subcommands
                  Track-2 language references are missing.
   similarity     H1: same-speaker cosine similarity within vs across languages
                  (exact over all non-overlapping window pairs, also time-matched),
-                 and a session-disjoint language probe (balanced accuracy, macro-F1).
+                 and a leave-one-speaker-out language probe inside each recording
+                 (DISPLACE language labels L1, L2, ... are relative to a recording).
   switch-errors  H2: where do the errors of a diarization output fall? Four
                  conditions: same/different speaker x same/different language.
   diarize        Clustering-only diarization with ORACLE speech regions, with and
@@ -59,6 +60,8 @@ def read_rttm_dir(d):
                 p = line.split()
                 if len(p) < 8 or p[0] not in ("SPEAKER", "LANGUAGE"):  # Track-2 RTTMs use LANGUAGE
                     continue
+                if p[0] == "LANGUAGE" and p[7].startswith("?"):
+                    continue  # DISPLACE marks unclear or non-speech language segments as "?:..."
                 s, dur = float(p[3]), float(p[4])
                 if dur > 0:
                     out[p[1]].append((s, s + dur, p[7]))
