@@ -1,0 +1,10 @@
+[dev.npz] windows: 88811; single-speaker 49.9%; with a language label 97.9%; used for analysis (both) 49.5%; clustered (speech >= 50%) 100.0%
+[H1 drift] multilingual speakers: 111 (languages per speaker: {2: 111})
+  rho_same  : mean 0.3370 sd 0.0577 median 0.3322
+  rho_cross : mean 0.3282 sd 0.0584 median 0.3184
+  drift (rho_same - rho_cross)  : n=111, mean +0.009 cos, median +0.007, 95% CI [+0.008, +0.010], Wilcoxon p = 1.91e-19, rank-biserial r = +0.99, better/tied/worse = 37/74/0
+  drift, time-matched           : n=111, mean +0.009 cos, median +0.009, 95% CI [+0.007, +0.012], Wilcoxon p = 1.03e-09, rank-biserial r = +0.67, better/tied/worse = 52/48/11
+  speakers with positive drift  : 97.3%
+[H1 language probe] 34 recordings, 40697 windows; leave-one-speaker-out inside each recording; logistic regression (C=1, balanced class weights)
+  balanced accuracy 57.7% (mean over recordings; 95% CI [55.8, 59.7]), macro-F1 56.7%
+  chance 50.0%, majority-class rate 64.5%; above chance: Wilcoxon over recordings p = 2.91e-09

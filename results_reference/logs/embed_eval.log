@@ -1,0 +1,74 @@
+OneLogger: Setting error_handling_strategy to DISABLE_QUIETLY_AND_REPORT_METRIC_ERROR for rank (rank=0) with OneLogger disabled. To override: explicitly set error_handling_strategy parameter.
+No exporters were provided. This means that no telemetry data will be collected.
+[NeMo I 2026-10-30 01:18:57 cloud:58] Found existing object /root/.cache/torch/NeMo/NeMo_3.0.0/titanet-l/11ba0924fdf87c049e339adbf6899d48/titanet-l.nemo.
+[NeMo I 2026-10-30 01:18:57 cloud:64] Re-using file from: /root/.cache/torch/NeMo/NeMo_3.0.0/titanet-l/11ba0924fdf87c049e339adbf6899d48/titanet-l.nemo
+[NeMo I 2026-10-30 01:18:57 common:1122] Instantiating model from pre-trained checkpoint
+[NeMo W 2026-10-30 01:18:57 modelPT:175] If you intend to do training or fine-tuning, please call the ModelPT.setup_training_data() method and provide a valid configuration file to setup the train data loader.
+    Train config : 
+    manifest_filepath: /manifests/combined_fisher_swbd_voxceleb12_librispeech/train.json
+    sample_rate: 16000
+    labels: null
+    batch_size: 64
+    shuffle: true
+    is_tarred: false
+    tarred_audio_filepaths: null
+    tarred_shard_strategy: scatter
+    augmentor:
+      noise:
+        manifest_path: /manifests/noise/rir_noise_manifest.json
+        prob: 0.5
+        min_snr_db: 0
+        max_snr_db: 15
+      speed:
+        prob: 0.5
+        sr: 16000
+        resample_type: kaiser_fast
+        min_speed_rate: 0.95
+        max_speed_rate: 1.05
+    num_workers: 15
+    pin_memory: true
+    
+[NeMo W 2026-10-30 01:18:57 modelPT:182] If you intend to do validation, please call the ModelPT.setup_validation_data() or ModelPT.setup_multiple_validation_data() method and provide a valid configuration file to setup the validation data loader(s). 
+    Validation config : 
+    manifest_filepath: /manifests/combined_fisher_swbd_voxceleb12_librispeech/dev.json
+    sample_rate: 16000
+    labels: null
+    batch_size: 128
+    shuffle: false
+    num_workers: 15
+    pin_memory: true
+    
+[NeMo I 2026-10-30 01:18:58 save_restore_connector:287] Model EncDecSpeakerLabelModel was successfully restored from /root/.cache/torch/NeMo/NeMo_3.0.0/titanet-l/11ba0924fdf87c049e339adbf6899d48/titanet-l.nemo.
+  [1/32] B015: 2385 windows
+  [2/32] B016: 2345 windows
+  [3/32] B020: 2360 windows
+  [4/32] B023: 2435 windows
+  [5/32] B027: 2421 windows
+  [6/32] B029: 2339 windows
+  [7/32] B035: 2407 windows
+  [8/32] B039: 4711 windows
+  [9/32] B051: 2134 windows
+  [10/32] B052: 4385 windows
+  [11/32] B053: 4282 windows
+  [12/32] B054: 4039 windows
+  [13/32] M007: 2151 windows
+  [14/32] M008: 2332 windows
+  [15/32] M010: 2221 windows
+  [16/32] M017: 2395 windows
+  [17/32] M035: 2303 windows
+  [18/32] M044: 2381 windows
+  [19/32] M046: 2295 windows
+  [20/32] M047: 2251 windows
+  [21/32] M048: 2143 windows
+  [22/32] M049: 2226 windows
+  [23/32] M050: 2114 windows
+  [24/32] M051: 2101 windows
+  [25/32] M052: 2283 windows
+  [26/32] M053: 2398 windows
+  [27/32] M054: 2333 windows
+  [28/32] M055: 2322 windows
+  [29/32] M056: 2343 windows
+  [30/32] M057: 2071 windows
+  [31/32] M058: 2360 windows
+  [32/32] M059: 2191 windows
+saved 81457 embeddings of dim 192 to /content/drive/MyDrive/ncc2027/results/eval.npz

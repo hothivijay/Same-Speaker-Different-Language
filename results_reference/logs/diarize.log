@@ -1,0 +1,143 @@
+environment: Python 3.13.16 | CPU Intel(R) Xeon(R) CPU @ 2.00GHz | GPU Tesla T4
+versions: numpy 2.2.6, scipy 1.16.3, scikit-learn 1.6.1, torch 2.11.0+cu130, nemo_toolkit 3.0.0, pyannote.core 6.1.0, pyannote.metrics 4.2.0
+[dev] 35 sessions; reference speakers per session min 3, median 3, max 4; sessions above the cap of 8: 0
+[eval] 32 sessions; reference speakers per session min 3, median 3, max 5; sessions above the cap of 8: 0
+[dev] windows: 88811; single-speaker 49.9%; with a language label 97.9%; used for analysis (both) 49.5%; clustered (speech >= 50%) 100.0%
+[eval] windows: 81457; single-speaker 49.2%; with a language label 97.3%; used for analysis (both) 48.7%; clustered (speech >= 50%) 100.0%
+[dev] 19.70 h of audio
+  within-speaker language switches :  20164  (1023.8 per hour; 3718 with no other change within the radius)
+  switches with a speaker change   :   3481  ( 176.7 per hour)
+  switches without a clear speaker :   4536  ( 230.3 per hour)
+  speaker changes, same language   :   8613  ( 437.3 per hour)
+[eval] 17.92 h of audio
+  within-speaker language switches :  11892  ( 663.7 per hour; 3280 with no other change within the radius)
+  switches with a speaker change   :   1954  ( 109.1 per hour)
+  switches without a clear speaker :   2147  ( 119.8 per hour)
+  speaker changes, same language   :   9628  ( 537.4 per hour)
+
+=== Language subspace (development set) ===
+language offsets: 222 offsets from 111 multilingual speakers; each speaker's offsets sum to zero, so rank <= 111; numerical rank 111
+singular values (first 16): [0.5039 0.3657 0.3103 0.2988 0.2732 0.2655 0.2469 0.2371 0.2293 0.2255
+ 0.222  0.2194 0.2066 0.2034 0.1998 0.1924]
+k= 1: language energy removed eps_k  12.2% | between-speaker energy kept eta_k  99.2% | stability over 200 speaker bootstraps: mean 0.856, 5th pct 0.729 (1 = identical subspace)
+k= 2: language energy removed eps_k  18.6% | between-speaker energy kept eta_k  98.3% | stability over 200 speaker bootstraps: mean 0.700, 5th pct 0.458 (1 = identical subspace)
+k= 3: language energy removed eps_k  23.2% | between-speaker energy kept eta_k  96.9% | stability over 200 speaker bootstraps: mean 0.659, 5th pct 0.512 (1 = identical subspace)
+k= 4: language energy removed eps_k  27.5% | between-speaker energy kept eta_k  95.2% | stability over 200 speaker bootstraps: mean 0.656, 5th pct 0.540 (1 = identical subspace)
+k= 6: language energy removed eps_k  34.4% | between-speaker energy kept eta_k  92.1% | stability over 200 speaker bootstraps: mean 0.644, 5th pct 0.543 (1 = identical subspace)
+k= 8: language energy removed eps_k  40.0% | between-speaker energy kept eta_k  88.0% | stability over 200 speaker bootstraps: mean 0.643, 5th pct 0.556 (1 = identical subspace)
+k=12: language energy removed eps_k  49.7% | between-speaker energy kept eta_k  81.2% | stability over 200 speaker bootstraps: mean 0.664, 5th pct 0.595 (1 = identical subspace)
+k=16: language energy removed eps_k  57.4% | between-speaker energy kept eta_k  75.5% | stability over 200 speaker bootstraps: mean 0.683, 5th pct 0.625 (1 = identical subspace)
+
+=== Rank selection on the development set (NME-SC, oracle speech) ===
+dev k= 0: DER 26.64 | conf 8.89 | SR 0.0% | mean |K err| 0.34
+dev k= 1: DER 25.76 | conf 8.00 | SR 0.0% | mean |K err| 0.26
+dev k= 2: DER 25.42 | conf 7.67 | SR 0.0% | mean |K err| 0.20
+dev k= 3: DER 25.42 | conf 7.66 | SR 0.0% | mean |K err| 0.20
+dev k= 4: DER 25.57 | conf 7.82 | SR 0.0% | mean |K err| 0.23
+dev k= 6: DER 25.60 | conf 7.85 | SR 0.0% | mean |K err| 0.23
+dev k= 8: DER 25.65 | conf 7.90 | SR 0.0% | mean |K err| 0.23
+dev k=12: DER 25.72 | conf 7.96 | SR 0.0% | mean |K err| 0.26
+dev k=16: DER 25.76 | conf 8.01 | SR 0.0% | mean |K err| 0.26
+chosen k on dev: 2
+
+=== Evaluation set, NME-SC, oracle speech regions (no collar, overlap scored) ===
+
+BASELINE (k=0)
+  all            : ref  19.45 h | miss 17.39 | FA  0.00 | conf 11.71 | DER 29.10   mean |K err| 0.38
+  split rate SR  : 2.6% of 76 multilingual speakers (>= 5 windows per language); shifted-label control 2.6%; SR with >= 20 windows per language 2.9%
+  cluster change between adjacent windows of one speaker: across a language switch 3.8% (1497 pairs) vs same language 3.6% (10860 pairs)
+  SS-SL same speaker, same language (away from any change)  : share  48.0% | ref   9.34 h | miss 14.11 | FA  0.00 | conf  7.76 | DER 21.87
+  SS-DL same speaker, language switch                       : share   7.5% | ref   1.46 h | miss  7.91 | FA  0.00 | conf  8.94 | DER 16.85
+  DS-SL speaker change, same language                       : share  12.7% | ref   2.47 h | miss 28.30 | FA  0.00 | conf 17.46 | DER 45.77
+  DS-DL speaker change with language switch                 : share   1.9% | ref   0.38 h | miss 21.98 | FA  0.00 | conf 23.45 | DER 45.43
+  frame scorer vs pyannote.metrics: max |DER difference| 0.092 points over 32 files
+
+LSP (k=2)
+  all            : ref  19.45 h | miss 17.39 | FA  0.00 | conf 10.99 | DER 28.38   mean |K err| 0.38
+  split rate SR  : 2.6% of 76 multilingual speakers (>= 5 windows per language); shifted-label control 2.6%; SR with >= 20 windows per language 2.9%
+  cluster change between adjacent windows of one speaker: across a language switch 4.0% (1497 pairs) vs same language 3.4% (10860 pairs)
+  SS-SL same speaker, same language (away from any change)  : share  48.0% | ref   9.34 h | miss 14.11 | FA  0.00 | conf  7.32 | DER 21.43
+  SS-DL same speaker, language switch                       : share   7.5% | ref   1.46 h | miss  7.91 | FA  0.00 | conf  8.05 | DER 15.96
+  DS-SL speaker change, same language                       : share  12.7% | ref   2.47 h | miss 28.30 | FA  0.00 | conf 17.04 | DER 45.34
+  DS-DL speaker change with language switch                 : share   1.9% | ref   0.38 h | miss 21.98 | FA  0.00 | conf 23.03 | DER 45.01
+  frame scorer vs pyannote.metrics: max |DER difference| 0.092 points over 32 files
+
+PRIMARY TEST (pre-specified): DER baseline - DER LSP, paired over evaluation sessions
+  n=32, mean +0.756 points, median +0.076, 95% CI [+0.022, +2.157], Wilcoxon p = 0.0233, rank-biserial r = +0.46, better/tied/worse = 18/3/11
+  relative DER change: -2.5%
+
+SECONDARY (Holm-corrected below)
+  H2, baseline: confusion at within-speaker switches minus elsewhere (sessions with >= 30 s at switches)
+  baseline SS-DL - SS-SL: n=23, mean +1.254 points, median -0.371, 95% CI [-1.419, +4.487], Wilcoxon p = 0.846, rank-biserial r = +0.05, better/tied/worse = 9/1/13
+  baseline DS-SL - SS-SL (speaker change alone): n=29, mean +9.053 points, median +10.350, 95% CI [+7.180, +10.743], Wilcoxon p = 9.31e-08, rank-biserial r = +0.96, better/tied/worse = 27/0/2
+
+=== Controls: other projections removing 2 dimension(s) (eval, NME-SC) ===
+PCA                   : DER 29.08 | conf 11.69 | conf SS-DL 8.69 | SR 2.6% | |K err| 0.38
+NAP (within-speaker)  : DER 28.07 | conf 10.68 | conf SS-DL 7.36 | SR 2.6% | |K err| 0.34
+Shifted-label LSP     : DER 29.07 (sd over 3 seeds 0.04) | conf 11.68 | conf SS-DL 8.71 | SR 3.5% | |K err| 0.38
+Random                : DER 29.07 (sd over 3 seeds 0.01) | conf 11.68 | conf SS-DL 8.79 | SR 2.6% | |K err| 0.38
+
+=== Second back end: AHC, threshold tuned on dev separately for k=0 and k*=2 ===
+  k=0: dev DER by threshold 0.30:99.6 0.35:99.4 0.40:98.8 0.45:97.6 0.50:94.5 0.55:89.1 0.60:80.1 0.65:67.0 0.70:52.9 0.75:40.2 0.80:34.2 0.85:35.2 0.90:42.1 0.95:55.3 1.00:57.9 1.05:57.9 1.10:57.9 1.15:57.9 1.20:57.9 1.25:57.9 1.30:57.9
+  k=0: chosen threshold 0.80 (dev DER 34.24)
+  k=2: dev DER by threshold 0.30:99.6 0.35:99.4 0.40:99.0 0.45:97.7 0.50:95.1 0.55:88.8 0.60:80.2 0.65:66.9 0.70:52.5 0.75:39.9 0.80:33.6 0.85:35.5 0.90:41.2 0.95:54.8 1.00:57.9 1.05:57.9 1.10:57.9 1.15:57.9 1.20:57.9 1.25:57.9 1.30:57.9
+  k=2: chosen threshold 0.80 (dev DER 33.55)
+
+AHC baseline (k=0)
+  all            : ref  19.45 h | miss 17.39 | FA  0.00 | conf 19.74 | DER 37.13   mean |K err| 23.78
+  split rate SR  : 3.9% of 76 multilingual speakers (>= 5 windows per language); shifted-label control 3.4%; SR with >= 20 windows per language 2.9%
+  warnings.warn("y_pred contains classes not in y_true")
+  warnings.warn("y_pred contains classes not in y_true")
+  warnings.warn("y_pred contains classes not in y_true")
+  warnings.warn("y_pred contains classes not in y_true")
+  warnings.warn("y_pred contains classes not in y_true")
+  warnings.warn("y_pred contains classes not in y_true")
+  warnings.warn("y_pred contains classes not in y_true")
+  warnings.warn("y_pred contains classes not in y_true")
+
+  SS-SL same speaker, same language (away from any change)  : share  48.0% | ref   9.34 h | miss 14.11 | FA  0.00 | conf 14.92 | DER 29.03
+  SS-DL same speaker, language switch                       : share   7.5% | ref   1.46 h | miss  7.91 | FA  0.00 | conf 17.62 | DER 25.53
+  DS-SL speaker change, same language                       : share  12.7% | ref   2.47 h | miss 28.30 | FA  0.00 | conf 27.00 | DER 55.30
+  DS-DL speaker change with language switch                 : share   1.9% | ref   0.38 h | miss 21.98 | FA  0.00 | conf 33.81 | DER 55.78
+
+AHC + LSP (k=2)
+  all            : ref  19.45 h | miss 17.39 | FA  0.00 | conf 20.57 | DER 37.96   mean |K err| 24.53
+  split rate SR  : 2.6% of 76 multilingual speakers (>= 5 windows per language); shifted-label control 3.8%; SR with >= 20 windows per language 2.9%
+  cluster change between adjacent windows of one speaker: across a language switch 12.1% (1497 pairs) vs same language 12.6% (10860 pairs)
+  SS-SL same speaker, same language (away from any change)  : share  48.0% | ref   9.34 h | miss 14.11 | FA  0.00 | conf 15.55 | DER 29.65
+  SS-DL same speaker, language switch                       : share   7.5% | ref   1.46 h | miss  7.91 | FA  0.00 | conf 17.96 | DER 25.87
+  DS-SL speaker change, same language                       : share  12.7% | ref   2.47 h | miss 28.30 | FA  0.00 | conf 27.82 | DER 56.12
+  DS-DL speaker change with language switch                 : share   1.9% | ref   0.38 h | miss 21.98 | FA  0.00 | conf 34.92 | DER 56.90
+
+Secondary comparisons (positive = second system better), Holm-adjusted p:
+  LSP vs baseline, confusion at within-speaker switches: n=23, mean +1.834 points, median +0.000, 95% CI [+0.085, +5.153], Wilcoxon p = 0.0353, rank-biserial r = +0.64, better/tied/worse = 10/9/4; Holm p = 0.212
+  LSP vs baseline, confusion overall: n=32, mean +0.756 points, median +0.076, 95% CI [+0.022, +2.157], Wilcoxon p = 0.0233, rank-biserial r = +0.46, better/tied/worse = 18/3/11; Holm p = 0.163
+  LSP vs PCA, DER: n=32, mean +0.742 points, median +0.094, 95% CI [+0.006, +2.150], Wilcoxon p = 0.0456, rank-biserial r = +0.41, better/tied/worse = 22/1/9; Holm p = 0.228
+  LSP vs NAP (within-speaker), DER: n=32, mean -0.283 points, median -0.035, 95% CI [-0.734, -0.011], Wilcoxon p = 0.125, rank-biserial r = -0.32, better/tied/worse = 11/2/19; Holm p = 0.345
+  LSP vs Shifted-label LSP, DER: n=32, mean +0.717 points, median +0.085, 95% CI [-0.015, +2.118], Wilcoxon p = 0.0479, rank-biserial r = +0.41, better/tied/worse = 21/2/9; Holm p = 0.228
+  LSP vs Random, DER: n=32, mean +0.727 points, median +0.036, 95% CI [-0.013, +2.134], Wilcoxon p = 0.12, rank-biserial r = +0.32, better/tied/worse = 21/1/10; Holm p = 0.345
+  AHC: LSP vs baseline, DER: n=32, mean -0.959 points, median -0.134, 95% CI [-2.118, -0.024], Wilcoxon p = 0.115, rank-biserial r = -0.32, better/tied/worse = 13/0/19; Holm p = 0.345
+
+=== Speaker information after projection (eval; within-session, non-overlapping window pairs) ===
+  trials: tgt_same 48000, tgt_cross 36306, non_same 48000, non_cross 36952
+  [original] drift +0.0131 | EER all 20.66% | EER cross-language targets 21.77% | probe bal. acc. 54.8% | mean cosine: tgt_same 0.331, tgt_cross 0.311, non_same 0.120, non_cross 0.112
+  [LSP k=2] drift +0.0094 | EER all 19.99% | EER cross-language targets 20.94% | probe bal. acc. 48.5% | mean cosine: tgt_same 0.328, tgt_cross 0.312, non_same 0.111, non_cross 0.107
+  [PCA seed 0] drift +0.0136 | EER all 21.37% | EER cross-language targets 22.79% | probe bal. acc. 54.3% | mean cosine: tgt_same 0.309, tgt_cross 0.288, non_same 0.108, non_cross 0.101
+  [NAP (within-speaker) seed 0] drift +0.0109 | EER all 19.65% | EER cross-language targets 20.72% | probe bal. acc. 52.2% | mean cosine: tgt_same 0.323, tgt_cross 0.306, non_same 0.106, non_cross 0.102
+  [Shifted-label LSP seed 0] drift +0.0131 | EER all 20.59% | EER cross-language targets 21.74% | probe bal. acc. 54.5% | mean cosine: tgt_same 0.329, tgt_cross 0.309, non_same 0.118, non_cross 0.109
+  [Shifted-label LSP seed 1] drift +0.0130 | EER all 20.62% | EER cross-language targets 21.80% | probe bal. acc. 54.8% | mean cosine: tgt_same 0.330, tgt_cross 0.309, non_same 0.119, non_cross 0.111
+  [Shifted-label LSP seed 2] drift +0.0128 | EER all 20.87% | EER cross-language targets 22.01% | probe bal. acc. 54.7% | mean cosine: tgt_same 0.332, tgt_cross 0.312, non_same 0.121, non_cross 0.114
+  [Random seed 0] drift +0.0131 | EER all 20.75% | EER cross-language targets 21.80% | probe bal. acc. 54.8% | mean cosine: tgt_same 0.332, tgt_cross 0.312, non_same 0.120, non_cross 0.112
+  [Random seed 1] drift +0.0131 | EER all 20.69% | EER cross-language targets 21.89% | probe bal. acc. 54.5% | mean cosine: tgt_same 0.331, tgt_cross 0.311, non_same 0.119, non_cross 0.111
+  [Random seed 2] drift +0.0130 | EER all 20.67% | EER cross-language targets 21.82% | probe bal. acc. 54.6% | mean cosine: tgt_same 0.332, tgt_cross 0.311, non_same 0.120, non_cross 0.111
+
+=== Gain by amount of within-speaker code-switching (eval) ===
+  Spearman correlation between within-speaker switches per hour and DER gain over 32 recordings: rho = -0.11, p = 0.549
+  low    third: 11 recordings,    0.0- 310.7 switches/h | baseline DER 25.17 | LSP DER 25.05 | mean gain +0.12 [-0.01, +0.28]
+  middle third: 11 recordings,  580.3- 825.2 switches/h | baseline DER 31.52 | LSP DER 29.49 | mean gain +2.02 [+0.00, +6.00]
+  high   third: 10 recordings,  886.4-2021.5 switches/h | baseline DER 30.60 | LSP DER 30.55 | mean gain +0.06 [-0.09, +0.20]
+
+norm of projected unit embeddings: min 0.676, 1st percentile 0.869, share below 0.5: 0.000%
+runtime on this machine (17.92 h of eval audio, 81457 windows): projection 14.1 ms per hour of audio (CPU, numpy); NME-SC clustering 1.1 s per hour (baseline) and 2.1 s per hour (LSP)
+
+summary written to /content/drive/MyDrive/ncc2027/results/runs/summary.json

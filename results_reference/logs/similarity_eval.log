@@ -1,0 +1,12 @@
+/usr/local/lib/python3.13/dist-packages/sklearn/metrics/_classification.py:2524: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+[eval.npz] windows: 81457; single-speaker 49.2%; with a language label 97.3%; used for analysis (both) 48.7%; clustered (speech >= 50%) 100.0%
+[H1 drift] multilingual speakers: 77 (languages per speaker: {2: 56, 3: 21})
+  rho_same  : mean 0.3298 sd 0.0759 median 0.3338
+  rho_cross : mean 0.3167 sd 0.0737 median 0.3153
+  drift (rho_same - rho_cross)  : n=77, mean +0.013 cos, median +0.012, 95% CI [+0.011, +0.015], Wilcoxon p = 3.94e-14, rank-biserial r = +0.99, better/tied/worse = 48/29/0
+  drift, time-matched           : n=77, mean +0.010 cos, median +0.009, 95% CI [+0.006, +0.013], Wilcoxon p = 1.2e-07, rank-biserial r = +0.69, better/tied/worse = 35/39/3
+  speakers with positive drift  : 97.4%
+[H1 language probe] 24 recordings, 30516 windows; leave-one-speaker-out inside each recording; logistic regression (C=1, balanced class weights)
+  balanced accuracy 55.1% (mean over recordings; 95% CI [52.2, 58.4]), macro-F1 51.7%
+  chance 44.4%, majority-class rate 59.9%; above chance: Wilcoxon over recordings p = 5.96e-07

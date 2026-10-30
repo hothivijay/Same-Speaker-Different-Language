@@ -1,0 +1,16 @@
+# Analysis (all steps except "embed")
+numpy
+scipy
+scikit-learn
+pyannote.core
+pyannote.metrics
+soundfile
+librosa
+# Speaker embeddings (TitaNet-Large); installs PyTorch as a dependency
+nemo_toolkit[asr]
+# Only for --pseudo-lid (language labels from a language-ID model when Track-2 RTTMs are missing)
+# speechbrain
+#
+# Versions of the reference run (Google Colab, Tesla T4, Python 3.13.16):
+# numpy 2.2.6, scipy 1.16.3, scikit-learn 1.6.1, torch 2.11.0+cu130, nemo_toolkit 3.0.0,
+# pyannote.core 6.1.0, pyannote.metrics 4.2.0
